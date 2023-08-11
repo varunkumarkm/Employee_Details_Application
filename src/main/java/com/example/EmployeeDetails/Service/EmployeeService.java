@@ -1,6 +1,8 @@
 package com.example.EmployeeDetails.Service;
 
 import java.util.List;
+import java.util.Optional;
+
 import com.example.EmployeeDetails.Entitiy.Employee;
 
 public interface EmployeeService {
@@ -9,8 +11,10 @@ public interface EmployeeService {
 
 	public List<Employee> getAllEmployees();
 
-	public void updateEmployee(Employee employee);
+	public void updateEmployee(Employee employee, long id);
 
 	public void deleteEmployee(long id);
+
+	public Optional<Employee> getEmployeeById(long id);
 	
 }
