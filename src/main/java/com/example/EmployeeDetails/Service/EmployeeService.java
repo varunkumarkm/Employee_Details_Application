@@ -3,11 +3,17 @@ package com.example.EmployeeDetails.Service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.http.ResponseEntity;
+
 import com.example.EmployeeDetails.Entitiy.Employee;
+import com.example.EmployeeDetails.Payload.EmployeeDTO;
+import com.example.EmployeeDetails.Payload.EmployeeResponse;
+
+import jakarta.validation.Valid;
 
 public interface EmployeeService {
 
-	public void save(Employee employee);
+/*	public void save(Employee employee);
 
 	public List<Employee> getAllEmployees();
 
@@ -15,6 +21,19 @@ public interface EmployeeService {
 
 	public void deleteEmployee(long id);
 
-	public Optional<Employee> getEmployeeById(long id);
+	public Optional<Employee> getEmployeeById(long id); */
+	
+//-----------------------------------------------------------------------
+	public EmployeeDTO createEmployee(EmployeeDTO employeeDto);
+
+	public List<EmployeeDTO> getAllEmployees();
+
+	public EmployeeDTO getEmployeeById(long id);
+
+	public EmployeeDTO updateEmployee(@Valid EmployeeDTO employeeDto, long id);
+
+	public void deleteEmployeeById(long id);
+
+	EmployeeResponse getEmployeesPagination(int pageNo, int pageSize, String sortBy);
 	
 }
