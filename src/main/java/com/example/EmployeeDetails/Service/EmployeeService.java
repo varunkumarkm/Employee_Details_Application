@@ -1,11 +1,6 @@
 package com.example.EmployeeDetails.Service;
 
 import java.util.List;
-import java.util.Optional;
-
-import org.springframework.http.ResponseEntity;
-
-import com.example.EmployeeDetails.Entitiy.Employee;
 import com.example.EmployeeDetails.Payload.EmployeeDTO;
 import com.example.EmployeeDetails.Payload.EmployeeResponse;
 
@@ -34,6 +29,6 @@ public interface EmployeeService {
 
 	public void deleteEmployeeById(long id);
 
-	EmployeeResponse getEmployeesPagination(int pageNo, int pageSize, String sortBy);
+	EmployeeResponse getEmployeesPagination(int pageNo, int pageSize, String sortBy, String sortDir);
 	
 }

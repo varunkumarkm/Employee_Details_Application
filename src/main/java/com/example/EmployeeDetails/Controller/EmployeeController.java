@@ -1,7 +1,6 @@
 package com.example.EmployeeDetails.Controller;
 
 import java.util.List;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.example.EmployeeDetails.Entitiy.Employee;
 import com.example.EmployeeDetails.Payload.EmployeeDTO;
 import com.example.EmployeeDetails.Payload.EmployeeResponse;
 import com.example.EmployeeDetails.Service.EmployeeService;
+import com.example.EmployeeDetails.Utils.AppConstants;
 
 import jakarta.validation.Valid;
 
@@ -87,12 +86,14 @@ public class EmployeeController {
     @GetMapping("/employeePagination")
     public EmployeeResponse getEmployeesPagination(
     	//RequestParam will read the value from url
-    	@RequestParam (value = "pageNo", defaultValue = "0", required = false) int pageNo,
-    	@RequestParam (value = "pageSize", defaultValue = "10", required = false) int pageSize,
+    	@RequestParam (value = "pageNo", defaultValue = AppConstants.DEFAULT_PAGE_NUMBER, required = false) int pageNo,
+    	@RequestParam (value = "pageSize", defaultValue = AppConstants.DEFAULT_PAGE_SIZE, required = false) int pageSize,
     	//localhost:8080/api/employees/employeePagination?pageNo=0&pageSize=05&sortBy=filedName
-    	@RequestParam (value = "sortBy", defaultValue = "id", required = false) String sortBy	
+    	@RequestParam (value = "sortBy", defaultValue = AppConstants.DEFAULT_SORT_BY, required = false) String sortBy,	
+    	//localhost:8080/api/employees/employeePagination?pageNo=0&pageSize=05&sortBy=filedName&sortDir=desc
+    	@RequestParam(value = "sortDir", defaultValue = AppConstants.DEFAULT_SORT_DIR, required = false) String sortDir
     	){
-    	return employeeService.getEmployeesPagination(pageNo, pageSize, sortBy);
+    	return employeeService.getEmployeesPagination(pageNo, pageSize, sortBy, sortDir);
     	}
     }
 

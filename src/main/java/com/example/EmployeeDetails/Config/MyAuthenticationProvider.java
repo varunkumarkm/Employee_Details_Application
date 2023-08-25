@@ -15,7 +15,7 @@
 //	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 //		String userName = authentication.getName();
 //		Object password = authentication.getCredentials().toString();
-//		if("varun".equals(userName)&& "Varun@1234".equals(password)) {
+//		if("varun".equals(userName)&& "varun@1234".equals(password)) {
 //			return new UsernamePasswordAuthenticationToken(userName, password, Arrays.asList());
 //		}else {
 //			throw new BadCredentialsException("Invalid userName or password");

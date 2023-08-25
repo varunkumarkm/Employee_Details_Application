@@ -1,9 +1,7 @@
 package com.example.EmployeeDetails.ServiceImpl;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -89,9 +87,12 @@ public class EmployeeServiceImpl implements EmployeeService{
 	}
 	
 	@Override
-	public EmployeeResponse getEmployeesPagination(int pageNo, int pageSize, String sortBy) {
+	public EmployeeResponse getEmployeesPagination(int pageNo, int pageSize, String sortBy, String sortDir) {
 		
-		Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
+		Sort sort = sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortBy).ascending()
+                    : Sort.by(sortBy).descending();
+ 
+		Pageable pageable = PageRequest.of(pageNo, pageSize, sort);
 		Page<Employee> employees = employeeRepo.findAll(pageable);
 		List<Employee> content = employees.getContent();
 		
