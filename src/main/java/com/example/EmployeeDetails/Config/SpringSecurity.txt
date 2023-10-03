@@ -1,0 +1,156 @@
+    Spring Security:
+    ---------------
+    
+  Advantages of spring security
+  -> Spring Security has numerous advantages. Some of that are given below.
+  * Comprehensive support for authentication and authorization.
+  * Protection against common tasks
+  * Servlet API integration
+  * Integration with Spring MVC
+  * Portability
+  * CSRF protection
+  * Java Configuration support
+  
+  Spring Security Features
+  -> * LDAP (Lightweight Directory Access Protocol)
+     * Single sign-on
+     * JAAS (Java Authentication and Authorization Service) LoginModule
+     * Basic Access Authentication
+     * Digest Access Authentication
+     * Remember-me
+     * Web Form Authentication
+     * Authorization
+     * Software Localization
+     * HTTP Authorization
+     
+     1) LDAP (Lightweight Directory Access Protocol)
+     -> It is an open application protocol for maintaining and accessing distributed directory information services over an Internet Protocol.
+     
+     2) Single sign-on
+     -> This feature allows a user to access multiple applications with the help of single account(user name and password).
+     
+     3) JAAS (Java Authentication and Authorization Service) LoginModule
+     -> It is a Pluggable Authentication Module implemented in Java. Spring Security supports it for its authentication process.
+     
+     4) Basic Access Authentication
+     -> Spring Security supports Basic Access Authentication that is used to provide user name and password while making request over the network.
+
+     5) Digest Access Authentication
+     -> This feature allows us to make authentication process more secure than Basic Access Authentication. It asks to the browser to confirm the identity of the user before sending sensitive data over the network.
+     
+     6) Remember-me
+     -> Spring Security supports this feature with the help of HTTP Cookies. It remember to the user and avoid login again from the same machine until the user logout. 
+     
+     7) Web Form Authentication
+     -> In this process, web form collect and authenticate user credentials from the web browser. Spring Security supports it while we want to implement web form authentication.
+    
+     8) Authorization
+     -> Spring Security provides the this feature to authorize the user before accessing resources. It allows developers to define access policies against the resources
+      
+     9) Software Localization
+     -> This feature allows us to make application user interface in any language. 
+     
+     10)HTTP Authorization
+     -> Spring provides this feature for HTTP authorization of web request URLs using Apache Ant paths or regular expressions.
+     
+     
+     Features added in Spring Security 5.0
+     
+     1) OAuth 2.0 Login
+     -> This feature provides the facility to the user to login into the application by using their existing account at GitHub or Google. This feature is implemented by using the Authorization Code Grant that is specified in the OAuth 2.0 Authorization Framework.
+     
+     2) Reactive Support
+     -> From version Spring Security 5.0, it provides reactive programming and reactive web runtime support and even, we can integrate with Spring WebFlux.
+     
+     3) Modernized Password Encoding
+     -> Spring Security 5.0 introduced new Password encoder DelegatingPasswordEncoder which is more modernize and solve all the problems of previous encoder NoOpPasswordEncoder.
+     
+* Authentication: It means verify the userName and Password
+  Spring Security is helps us to do is Autharaization
+  
+* Autharaization: it means every applications has roles, I'm an admin there are some features can accessing it
+  as a customer some feature can accessing it, as a accountant there are some features can accessing it, as a
+  manager some other features etc. which means whenever we use a admin cridentils we can access only for admin feature as well as
+  managers, customers etc. 
+  Autharaization is a role based
+  when we use spring security it is so well design, so well tested, hacking our application which spring security
+  which will become difficult.
+
+  Form based Authentication:
+  -------------------------
+  step-1: Added a dependency in our project pom.xml file - it will gives us a all spring secutity jar files
+  whenever we add this file our all url's are securied 
+ 
+  step-2: using this url localhost:8080/login     userName is user and password is generated password
+  This is called as form based authentication
+
+  strep-3: We are using our own username and password what is the steps we follows are:
+  * application.properties file add some default username and password and the role
+  
+  Basic Authentication:
+  --------------------
+  step-4: Developing a config file in this config file going to add the configuration, This is the place where
+  we control, If I login as customer what should happen and if user what should happen which will who cal access 
+  all this controlling we will do it from here.
+  From this class we mainly added a two annotations are:
+  1) @Configuration - it is importing from spring framework, it tells that configuring this class in our applications urls
+                      it means which url who can access like that
+                      
+  2) @EnableWebSecurity - it says that we not using for the default configuration like user and auto generated password,
+     instead of we use that our own configuration which we are going to use will performing login from authentication
+     of login and authorization that is to chack what is our role.
+     For these things will have it into config class.  
+     
+  step-5: SecurityFilterChain is a filter chain that is responsible for all the security within a Spring Boot application12.
+          It is created by the configuration and is known as the springSecurityFilterChain1. The filter chain is capable of being matched against an HttpServletRequest to decide whether it applies to that request3.
+          Security filters intercept incoming requests and perform validation for authentication or authorization before redirecting the request to the target controller4.
+          
+  step-6: we use one important method is configure(HttpSecurity http) it tells which url who can access 
+  
+  
+  InMemoryAuthentication:
+  ----------------------
+  The username and password not pick from the application.properties file these username and password I'll storing it on inside the memory
+  For this we creating a new class for passwordEncode, in this class we using a BcryptPasswordEncoder
+  BcryptPasswordEncoder - it is a simple object encode our password int 64 encoding format
+  
+  How can we give an access for admin and users:
+  ---------------------------------------------
+  we want admin to access a certin method like delete and post only admin can do, and update admin can do, user is cannot access for that, But user can only acces for getting the details
+  
+  setp-1: we use  @EnableGlobalMethodSecurity(prePostEnabled = true) this annotation on security config class
+          when we add this annotation @PreAuthorize annotation will work or else will not work, we can add a access for users admins etc.
+  step-2: @PreAuthorize("hasRole('ADMIN')") on the request mentod post on controller layer
+  
+  
+  Sign-up features for the application:
+  ------------------------------------
+  When ever we dealing with spring security, we perform ManyToMany mapping 
+-> Whenever we are working with ManyToMany mapping we are using to 3 tables, middile table will connecting both 
+   the table and act like a mediator, it is must and should
+   
+   Step-1: In order to-do ManyToMany mapping firstly we need to thick of collection which can be ManyToMany
+   either it can be list to list, user is a list and role is a list, then it becomes a ManyToMany
+   But in the list the data can be duplicate, if I use set, set to set then the data is always unique 
+   
+  
+  
+  
+         
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

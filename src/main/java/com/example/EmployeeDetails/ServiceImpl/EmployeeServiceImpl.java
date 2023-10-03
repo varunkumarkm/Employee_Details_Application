@@ -2,6 +2,8 @@ package com.example.EmployeeDetails.ServiceImpl;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -21,7 +23,13 @@ import jakarta.validation.Valid;
 public class EmployeeServiceImpl implements EmployeeService{
 
 	@Autowired
-	private EmployeeRepository employeeRepo;	
+	private EmployeeRepository employeeRepo;
+	
+	private ModelMapper mapper;
+	
+	public EmployeeServiceImpl(ModelMapper mapper) {
+		this.mapper = mapper;
+	}
 
 /*	@Override
 	public void save(Employee employee) {
@@ -131,34 +139,38 @@ public class EmployeeServiceImpl implements EmployeeService{
 	
 	public Employee mapToEntity(EmployeeDTO employeeDto) {
 		
-		Employee employee = new Employee();
+		Employee employee = mapper.map(employeeDto, Employee.class);//It will automatically copy the data from DTO to Entity
 		
-		employee.setFirstName(employeeDto.getFirstName());
-		employee.setLastName(employeeDto.getLastName());
-		employee.setEmail(employeeDto.getEmail());
-		employee.setGender(employeeDto.getGender());
-		employee.setDesignation(employeeDto.getDesignation());
-		employee.setSalary(employeeDto.getSalary());
-		employee.setDateOfJoining(employeeDto.getDateOfJoining());
-		employee.setCity(employeeDto.getCity());
-		employee.setMobile(employeeDto.getMobile());
+//		Employee employee = new Employee();
+//		
+//		employee.setFirstName(employeeDto.getFirstName());
+//		employee.setLastName(employeeDto.getLastName());
+//		employee.setEmail(employeeDto.getEmail());
+//		employee.setGender(employeeDto.getGender());
+//		employee.setDesignation(employeeDto.getDesignation());
+//		employee.setSalary(employeeDto.getSalary());
+//		employee.setDateOfJoining(employeeDto.getDateOfJoining());
+//		employee.setCity(employeeDto.getCity());
+//		employee.setMobile(employeeDto.getMobile());
 		
 		return employee;
 	}
 	public EmployeeDTO mapToDto(Employee employee) {
 		
-		EmployeeDTO dto = new EmployeeDTO();
+		EmployeeDTO dto = mapper.map(employee, EmployeeDTO.class);//It will automatically copy the data from Entity to DTO 
 		
-		dto.setId(employee.getId());
-		dto.setFirstName(employee.getFirstName());
-		dto.setLastName(employee.getLastName());
-		dto.setEmail(employee.getEmail());
-		dto.setGender(employee.getGender());
-		dto.setDesignation(employee.getDesignation());
-		dto.setSalary(employee.getSalary());
-		dto.setDateOfJoining(employee.getDateOfJoining());
-		dto.setCity(employee.getCity());
-		dto.setMobile(employee.getMobile());
+//		EmployeeDTO dto = new EmployeeDTO();
+//		
+//		dto.setId(employee.getId());
+//		dto.setFirstName(employee.getFirstName());
+//		dto.setLastName(employee.getLastName());
+//		dto.setEmail(employee.getEmail());
+//		dto.setGender(employee.getGender());
+//		dto.setDesignation(employee.getDesignation());
+//		dto.setSalary(employee.getSalary());
+//		dto.setDateOfJoining(employee.getDateOfJoining());
+//		dto.setCity(employee.getCity());
+//		dto.setMobile(employee.getMobile());
 		
 		return dto;	
 	}

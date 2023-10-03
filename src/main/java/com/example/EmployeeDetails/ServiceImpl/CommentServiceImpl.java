@@ -2,6 +2,7 @@ package com.example.EmployeeDetails.ServiceImpl;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.example.EmployeeDetails.Entitiy.Comment;
@@ -19,6 +20,13 @@ public class CommentServiceImpl implements CommentService {
 	private CommentRepository commentRepo;
 	@Autowired
 	private EmployeeRepository employeeRepo; 
+	
+	
+    private ModelMapper mapper;
+	
+	public CommentServiceImpl(ModelMapper mapper) {
+		this.mapper = mapper;
+	}
 
 	@Override
 	public CommentDto createComment(long employeeId, CommentDto commentDto) {
@@ -70,21 +78,25 @@ public class CommentServiceImpl implements CommentService {
 	
 	private Comment mapToComment(CommentDto commentDto) {
 		
-		Comment comment = new Comment();
+		Comment comment = mapper.map(commentDto, Comment.class);
 		
-		comment.setBody(commentDto.getBody());
-		comment.setEmail(commentDto.getEmail());
-		comment.setName(commentDto.getName());
+//		Comment comment = new Comment();
+//		
+//		comment.setBody(commentDto.getBody());
+//		comment.setEmail(commentDto.getEmail());
+//		comment.setName(commentDto.getName());
 		return comment;
 	}
 	private CommentDto mapToDto(Comment comment) {
 		
-		CommentDto commentDto = new CommentDto();
+		CommentDto commentDto = mapper.map(comment, CommentDto.class);
 		
-		commentDto.setId(comment.getId());
-		commentDto.setBody(comment.getBody());
-		commentDto.setEmail(comment.getEmail());
-		commentDto.setName(comment.getName());
+//		CommentDto commentDto = new CommentDto();
+//		
+//		commentDto.setId(comment.getId());
+//		commentDto.setBody(comment.getBody());
+//		commentDto.setEmail(comment.getEmail());
+//		commentDto.setName(comment.getName());
 		return commentDto;
 		
 	}

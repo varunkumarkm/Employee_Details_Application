@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.EmployeeDetails.Payload.CommentDto;
 import com.example.EmployeeDetails.Service.CommentService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api")
 public class CommentController {
@@ -25,12 +28,16 @@ public class CommentController {
 	
 	//localhost:8080/api/employees/0/comments
 	@PostMapping("employees/{employeeId}/comments")
-	public ResponseEntity<CommentDto> createComment(@PathVariable long employeeId, @RequestBody CommentDto commentDto){
+	public ResponseEntity<CommentDto> createComment(@Valid @PathVariable long employeeId,
+			                                        @RequestBody CommentDto commentDto, BindingResult bindingResult){
 		CommentDto dto = commentService.createComment(employeeId, commentDto);
+		if(bindingResult.hasErrors()) {
+			return new ResponseEntity<CommentDto>((HttpStatus.INTERNAL_SERVER_ERROR));
+		}
 		return new ResponseEntity<CommentDto>(dto, HttpStatus.CREATED);
 	}
 	
-	//localhost:8080/api/employees/0/getAllEmployeeComments
+	//localhost:8080/api/employees/0/getEmployeeComments
 	@GetMapping("employees/{employeeId}/getEmployeeComments")
 	public List<CommentDto> getAllCommentsByEmployeeId(@PathVariable long employeeId) {
 		List<CommentDto> dto = commentService.getCommentByEmployeeId(employeeId);

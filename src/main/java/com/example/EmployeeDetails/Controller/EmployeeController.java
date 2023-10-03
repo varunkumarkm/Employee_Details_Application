@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -56,8 +57,9 @@ public class EmployeeController {
         return new ResponseEntity<>("Employee entity deleted successfully",HttpStatus.OK);
 	}   */
     
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/createEmployee")
-   public ResponseEntity<EmployeeDTO> createEmployee(@Valid @RequestBody EmployeeDTO  employeeDto){
+    public ResponseEntity<EmployeeDTO> createEmployee(@Valid @RequestBody EmployeeDTO  employeeDto){
 	return new ResponseEntity<EmployeeDTO>(employeeService.createEmployee(employeeDto),HttpStatus.CREATED);  	
     }
     
@@ -71,11 +73,14 @@ public class EmployeeController {
 		return ResponseEntity.ok(employeeService.getEmployeeById(id));
     }
     
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/updateEmployee/{id}")
     public ResponseEntity<EmployeeDTO> updateEmployee(@Valid @RequestBody EmployeeDTO employeeDto, @PathVariable long id){
     	EmployeeDTO dto = employeeService.updateEmployee(employeeDto, id);
 		return new ResponseEntity<>(dto, HttpStatus.OK);
     }
+    
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/deleteEmployee/{id}")
     public ResponseEntity<String> deleteEmployee(@PathVariable long id){
     	employeeService.deleteEmployeeById(id);
