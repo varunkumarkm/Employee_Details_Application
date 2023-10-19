@@ -79,10 +79,8 @@ public class EmployeeServiceImpl implements EmployeeService{
 	public EmployeeDTO getEmployeeById(long id) {
 	    Employee employee = employeeRepo.findById(id).orElseThrow(
 	    		()-> new ResourceNotFoundException("Employee", "id", id)
-	 
 	    		);
-	    EmployeeDTO employeeDto = mapToDto(employee);
-		
+	    EmployeeDTO employeeDto = mapToDto(employee);	
 		return employeeDto;
 	}
 	

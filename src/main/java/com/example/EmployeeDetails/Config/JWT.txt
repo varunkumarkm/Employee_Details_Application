@@ -1,0 +1,30 @@
+JWT (JSON web tockens)
+
+What is JWT in REATApi?
+-> JSON Web Tokens, known as JWTs are used for forming authorization for users. This helps us to build secure APIs 
+   and it is also easy to scale. During authentication, a JWT is returned. Whenever the user wants to access a protected resource, 
+   the browser must send JWTs in the Authorization header along with the request.
+   
+In online we need to search, write a code for JWT token with rest api signin
+
+step-1: Add the dependency  
+<dependency>
+	<groupId>io.jsonwebtoken</groupId>
+	<artifactId>jjwt</artifactId>
+	<version>0.9.1</version>
+</dependency>
+
+step-2: If any thing goes wrong with JWT tocken we throw an exception to the users for that we create on class
+is JwtAuthenticationEntryPoint 
+
+step-3: add the secrit key on application.properties file
+
+The JWT tocken is made-up of 3 parts are:
+1) Header: Header information which as algoritham 
+2) PAyload: just like a JSON object
+3) signature: secreate key, nobody can copying this
+
+step-4: Create a JwtAuthenticationFilter class
+step-5: create a JwtTokenProvider class
+step-6: update the AuthController class
+step-7: Create a JWTAuthResponse class 

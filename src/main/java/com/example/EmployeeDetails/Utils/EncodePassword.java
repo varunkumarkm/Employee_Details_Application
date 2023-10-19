@@ -7,6 +7,6 @@ public class EncodePassword {
 
 	public static void main(String[] args) {
 		PasswordEncoder encodePassword = new BCryptPasswordEncoder();
-		System.out.println(encodePassword.encode("Varun@1234"));
+		System.out.println(encodePassword.encode("admin"));
 	}
 }

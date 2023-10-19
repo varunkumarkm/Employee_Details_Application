@@ -133,6 +133,16 @@
    either it can be list to list, user is a list and role is a list, then it becomes a ManyToMany
    But in the list the data can be duplicate, if I use set, set to set then the data is always unique 
    
+   Whenever we want to create the security layer:
+   ---------------------------------------------
+   
+   step-1: Create User Entity and Role Entity with manyToMany mapping
+   step-2: Create UserRepo and RoleRepository with required custom methods
+   step-3: Create CustomUserDetailsService class implements UserDetailsService (loadByUserName)
+   step-4: Create SecurityConfig file
+           * Configure method with AuthenticationManagerBuilder 
+           
+   
   
   
   
